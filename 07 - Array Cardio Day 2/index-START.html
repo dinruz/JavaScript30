@@ -27,15 +27,102 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+
+    const thisYear = (new Date().getFullYear());
+    const isAbove19 = people.some(function(person) {
+      if ((thisYear - (person.year) >=19)){                    //person.year, not people.year (!)
+        return true;
+      }
+    });
+    console.log(`Is anyone from the list 19 or older: ${isAbove19}`);
+
+    //or shorter:
+
+  const Older19 = people.some((person => ((new Date().getFullYear())-(person.year) >=19)));
+   console.log(`Is anyone from the list older than 19: ${Older19}`);
+
     // Array.prototype.every() // is everyone 19 or older?
+
+    const everybody19 = people.every((person) => (((new Date().getFullYear())-person.year)>=19));
+    console.log(`Is everybody 19 or older: ${everybody19}`);
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    const comment = comments.find((comment)=> comment.id === 823423);
+    console.log (`The comment with ID 823423 is: ${comment.text}`);
+
+    // or
+
+    const findComment = comments.find((comm) => comm.id == 823423);
+    console.log(findComment);
+
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    const commInd = comments.findIndex((com) => (com.id === 823423));
+    console.log(`index of comment with ID 823423: ${commInd}`);
+    comments.splice(1,1);
+    console.table(comments);
+
+
+// SPREAD
+// Original to-do list
+
+const todos = [
+  { id: 1, text: 'buy bread', completed: false },
+  { id: 2, text: 'learn JavaScript', completed: false }
+];
+
+console.log('Original to-do:', todos);
+
+
+const newTask = { id: 3, text: 'walk a dog', completed: false };
+
+// MAKING NEW LIST =>  old todo + newTaskS
+
+const updatedTodos = [
+  ...todos, // = SPREAD all the elements from `todos`! (copy them here)
+ newTask //  addd newTask as last element
+];
+
+console.log('---');
+console.log('To-do (new list):', updatedTodos);
+// Output                      : [
+//   { id: 1, text: 'buy bread', completed: false },
+//   { id: 2, text: 'learn JavaScript', completed: false },
+//   { id: 3, text: 'walk a dog', completed: false }
+// ]
+
+console.log('---');
+console.log('Original to-do (check):', todos); //  Originalni 'todos' not changed
+// [ { id: 1, text: 'Kupi kruh', completed: false },
+//  { id: 2, text: 'Nauči JavaScript', completed: false } ]
+
+//NEW
+
+books = [
+{ name:'Price iz davnina', author:'Ivana Brlic Mazuranic', price: 45.20},
+{ name:'Brothers Kharamazovs', author: 'Fyodor M. Dostoevsky', price: 67.30},
+{ name: 'Homo Sapiens', author: 'Yuval N.Harari', price: 15.20}
+  ];
+  */
+  const newBook = {name: '1984', author: 'George Orwell', price: 25.70};
+  const booksFull=[
+    ...books,
+    newBook
+  ]
+  // or const booksFull=[...books, newBook];
+
+  console.log('Old list of books:');
+  console.table(books);
+  console.log('Updated book list:');
+  console.table(booksFull);
+  
+  console.log('Old list of books (again):');
+  console.table(books);
 
   </script>
 </body>
